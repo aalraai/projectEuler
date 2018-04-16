@@ -40,61 +40,50 @@ public class Solution11 {
 		int lines = 0;
 		String line = null;
 		int[][] inputSquare = null;
-		
-		RandomAccessFile bufferedReader = null;
-		
-		try{
+
+		File file = new File(filename);
+		try (RandomAccessFile bufferedReader = new RandomAccessFile(file, "r")) {
 			// FileReader reads text files in the default encoding.
-			File file = new File(filename);
-					
+
 			// Always wrap FileReader in BufferedReader.
-			bufferedReader = new RandomAccessFile(file, "r");
-			
-			while((line = bufferedReader.readLine()) != null){
+
+			while ((bufferedReader.readLine()) != null) {
 				lines++;
-			}			
-			
-			
+			}
+
+
 			inputSquare = new int[lines][lines];
 			bufferedReader.seek(0);
-			
+
 			i = 0;
-			while((line = bufferedReader.readLine()) != null){
-				StringTokenizer linePieces = new StringTokenizer(line," ");
+			while ((line = bufferedReader.readLine()) != null) {
+				StringTokenizer linePieces = new StringTokenizer(line, " ");
 				j = 0;
-				while(linePieces.hasMoreTokens()){
+				while (linePieces.hasMoreTokens()) {
 					inputSquare[i][j] = Integer.parseInt(linePieces.nextToken());
 					j++;
 				}
-				
-				i++;				
-			}
-			
-		//Testausgabe
-			
-		/*for(int k=0; k < lines; k++){
-			for(int l=0; l < lines; l++){
-				System.out.print(inputSquare[k][l] + "\t");
-			}
-			System.out.println();
-		}*/
 
-		
-		}catch(FileNotFoundException ex){
-			System.out.println("Unable to open file '" + filename +"'");
-		}catch(IOException ex){
-			System.out.println("Error reading file '" + filename + "'");
-		}finally{
-			//Always close files
-			try{
-				if(bufferedReader != null){
-					bufferedReader.close();
-				}
-			}catch(IOException e){
-				
+				i++;
 			}
+
+			//Testausgabe
+
+			for (int k = 0; k < lines; k++) {
+				for (int l = 0; l < lines; l++) {
+					System.out.print(inputSquare[k][l] + "\t");
+				}
+				System.out.println();
+			}
+
+
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + filename + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + filename + "'");
 		}
-			
+		//Always close files
+
 		return inputSquare;
 	}
 	
@@ -107,7 +96,7 @@ public class Solution11 {
 		
 		final int NMBR = 4;
 		double product = 0;
-		String fileName = "sol11.txt";
+		String fileName = "/home/akram/Documents/project/projectEuler/PEuler/src/projecteuler/sol11.txt";
 		
 		int[][] inputSquare = readInput(fileName);
 		
@@ -155,11 +144,11 @@ public class Solution11 {
 			}
 		}
 		
-		System.out.println(product);
+		System.out.println("product: " + product);
 		
 		
 		zstNachher = System.nanoTime();
-		System.out.println("Zeit ben�tigt: " + ((zstNachher - zstVorher)/1000000) + " ms");
+		System.out.println("Zeit benoetigt: " + ((zstNachher - zstVorher)/1000000) + " ms");
 		
 	}
 	

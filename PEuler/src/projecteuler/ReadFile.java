@@ -10,7 +10,7 @@ public class ReadFile {
 		String fileName = "sol13.txt";
 		
 		// This will reference one line at a time.
-		String line = null;
+		String line;
 		
 		BufferedReader bufferedReader = null;
 		
